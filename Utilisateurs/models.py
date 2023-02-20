@@ -7,7 +7,7 @@ class Utilisateur(models.Model):
     mot_de_passe = models.CharField(max_length=50)
 
 class ProfilUtilisateur(models.Model):
-    utilisateur = models.OneToOneField(Utilisateur)
+    utilisateur = models.OneToOneField(Utilisateur,on_delete=models.CASCADE)
     photo_profile = models.ImageField(upload_to='images-profiles')
     bio=models.TextField(max_length=100)
 
