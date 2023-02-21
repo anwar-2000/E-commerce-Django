@@ -37,10 +37,14 @@
                     <input class="form-control me-2" type="search" placeholder="Search Product" aria-label="Search">
                   </li>
                 </ul>
-                <button class="btn bg-success text-light m-3"><a class="nav-link " href="#"> Mon Compte</a></button>
-                <form class="d-flex ">
-                  <button class="btn btn-outline-success" type="submit"> Panier</button>
-                </form>
+                <button class="btn bg-success text-light m-2">
+
+                  {% if  request.user.is_authenticated %}
+                    <a href=" {% url 'logout' %}" class="text-light">  LOGOUT </a>
+                      {% else %}
+                     <a href=" {% url 'registerPage' %}" class="text-light" >Account</a></nav>
+                  {% endif %}
+                 </button>
               </div>
             </div>
           </nav>

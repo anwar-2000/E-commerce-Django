@@ -1,10 +1,19 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from .manager import UserManager
 
-class Utilisateur(models.Model):
-    email = models.EmailField()
-    username = models.CharField(max_length=50)
+class Utilisateur(AbstractUser):
+    username = None
+    email = models.EmailField(unique=True)
+    mobile = models.CharField(max_length=14,default="")
+    is_verified = models.BooleanField(default=False)
+    email_token=models.CharField(max_length=100,null=True,blank=True)
+    forgot_password = models.CharField(max_length=100,null=True,blank=True)
     addresse_de_livraison = models.TextField(max_length=150)
-    mot_de_passe = models.CharField(max_length=50)
+
+    objects = UserManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 class ProfilUtilisateur(models.Model):
     utilisateur = models.OneToOneField(Utilisateur,on_delete=models.CASCADE)
