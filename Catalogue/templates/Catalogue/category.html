@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block title %} Qualitex - Categorie {% endblock %}
+{% block content %}
+<center>
+  {% if current_category %}
+  <h1 class="text-success mt-5">Categorie: {{ current_category }}</h1>
+  {% endif %}
+</center>
+<center>
+  <div class="btn-group btn-group-lg mt-5" role="group">
+    {% for categorie in categories %}
+    <button type="button"  class="btn {% if current_category == categorie.nom %}btn-success{% else %}btn-outline-success {% endif %} ">
+      <a
+        href="{% url 'categoryProductPage' categorie.nom %}"
+        class="text-decoration-none {% if current_category == categorie.nom %}text-light {% else %} text-dark{% endif %} "
+        >{{categorie.nom}}</a
+      >
+    </button>
+    {% endfor %}
+  </div>
+</center>
+<div
+  class="d-flex justify-content-center align-items-start gap-3 p-5"
+  style="overflow: visible"
+>
+  {% for produit in produits %} {% include 'Catalogue/includes/produit.html' %}
+  {% endfor %}
+</div>
+{% endblock %}

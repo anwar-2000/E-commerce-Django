@@ -1,6 +1,9 @@
 from django.urls import path
-from django.conf.urls.static import static
-from django.conf import settings
+
+
+from .views import AllProduct , Productdetail , ProductByCategory
 urlpatterns = [
-  
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('',AllProduct.as_view(),name='allProducts'),
+    path('<str:category>/',ProductByCategory.as_view(),name='categoryProductPage'),
+    path('<int:id>',AllProduct.as_view(),name='produitDetails-page')
+]

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Qualitex
+{% endblock  %}
+
+{% block content %}
+    <center><h1 class="text-success mt-5">TOUS NOS PRODUITS</h1></center>
+   
+     
+    <center>
+        <div class="btn-group btn-group-lg mt-5" role="group" >
+        {% for categorie in categories  %}
+            <button type="button" class="btn btn-outline-success text-dark " ><a href="{% url 'categoryProductPage' categorie.nom %}" class="text-decoration-none text-dark">{{categorie.nom}}</a></button>
+        {% endfor %}
+    </div></center>
+    <div class="d-flex justify-content-center align-items-start gap-3 p-5 " style=" overflow : visible">
+    {% for produit in produits  %}
+        {% include 'Catalogue/includes/produit.html' %}
+    {% endfor %}
+    </div>
+{% endblock  %}
