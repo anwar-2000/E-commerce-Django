@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="card" style="width: 18rem;">
-    <img src="{{produit.photo.url}}" class="card-img-top object-fit-contain" alt="{{produit.nom}}">
+    <img src="{{produit.photo.url}}" class="card-img-top img-fluid " alt="{{produit.nom}}">
     <div class="card-body">
       <h5 class="card-title">{{produit.nom}}</h5>
     </div>
@@ -12,6 +12,6 @@
     </ul>
     <div class="card-body d-flex justify-content-center align-items-center">
       <a href="#" class="card-link bg-success text-light p-2 rounded-2 text-decoration-none"  >Ajouter au panier</a>
-      <a href="#" class="card-link btn btn-outline-success p-2 rounded-2 text-decoration-none">Voir Détails</a>
+      <a href="{% url 'produitDetails-page' produit.id %}" class="card-link btn btn-outline-success p-2 rounded-2 text-decoration-none">Voir Détails</a>
     </div>
   </div>

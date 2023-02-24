@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{produit.nom}}
+{% endblock %}
+
+{% block content %}
+
+    <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-center align-items-center" style="height : 100vh ; width:100%">
+        <div class="flex-2">
+            <img src='{{produit.photo.url}}' alt='{{produit.nom}}' style="width : 25rem ; margin : 0 5rem">
+        </div>
+        <div class="d-flex flex-1 flex-column justify-content-start align-items-start">
+           <div> <h1> {{produit.nom}}</h1></div>
+            <div>  <small class="font-weight-bold">QUANTITE :{{produit.quantite}}</small></div>
+                <div>  <small> PRIX :{{produit.prix}}€</small></div>
+                    <div>   <p style="width:40%">{{produit.description}}</p></div>
+                        <div>   <div class="d-flex justify-content-center align-items-center">
+               <a href="" > <button class="btn btn-success mx-2">Ajouter au Panier</button></a>
+               <a href="{% url 'paiment-direct' produit.id %}" >  <button class="btn btn-outline-success">Achat Direct</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

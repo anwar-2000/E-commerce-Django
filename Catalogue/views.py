@@ -36,3 +36,4 @@ class ProductByCategory(ListView):
 class Productdetail(DetailView):
     model = Produit
     template_name= "Catalogue/detail.html"
+    context_object_name = 'produit'

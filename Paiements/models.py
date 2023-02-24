@@ -6,6 +6,11 @@ class Coupon(models.Model):
     reduction=models.DecimalField(max_digits=5, decimal_places=2)
     date_de_expiration = models.DateTimeField()
 
+    def __str__(self):
+        return f"{self.code} "
+        
+    
+
 
 class Transaction(models.Model):
     commande = models.ForeignKey(Commande,on_delete=models.CASCADE)
