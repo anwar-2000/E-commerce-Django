@@ -1,4 +1,4 @@
-from django.shortcuts import render 
+from django.shortcuts import redirect, render 
 from django.contrib.auth.views import LoginView 
 from django.contrib.auth import logout
 from django.views.generic import CreateView
@@ -15,7 +15,6 @@ def logout_view(request):
 
 class loginView(LoginView):
     template_name="Utilisateurs/login.html"
-
     def get_success_url(self):
         # Redirect to another app URL after a successful login
         return reverse_lazy('accueil:index')

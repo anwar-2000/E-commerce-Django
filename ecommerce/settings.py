@@ -133,3 +133,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL="/images/"
 MEDIA_ROOT = BASE_DIR / "uploads"
+
+STRIPE_API_KEY = "sk_test_51Mf2vvHz6XdTAx5r4pBWdPqsrsZaWtGutgnFm34GujEXN8TsGnhInNA5fUzSHTIoxeFBIWaRFZ9bYPj3203pquIU006bzlhA3e"

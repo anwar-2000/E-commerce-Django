@@ -1,13 +1,67 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
     Checkout
 {% endblock title %}
-    
+    {% block cssFiles %}
+        <link rel="stylsheet" href="{% static 'Paiements/style.css' %}">
+    {% endblock cssFiles %}
 {% block content %}
     <center>
         <div class="alert alert-success alert-dismissible " role="alert">
             <strong>Holy guacamole!</strong> {{message}}
           </div>
     </center>
+    
+  <form action="{% url 'payment_process' %}" method="post" id="payment-form">
+    {% csrf_token %}
+    <div id="card-element"></div>
+    <button id="submit-button" class="btn btn-primary mt-3">Pay</button>
+
+    <input class="d-none" value={{id}} name='produit_id'>
+    <input class="d-none" value={{client_secret}} name='client_secret'>
+    <input class="d-none" value={{price}}name='price'>
+  </form>
+  
 {% endblock content %}
+
+{% block scripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  // Create a Stripe client.
+  var stripe = Stripe('{{ client_secret }}');
+
+  // Create an instance of Elements.
+  var elements = stripe.elements();
+
+  // Create an instance of the card Element.
+  var card = elements.create('card');
+
+  // Add the card Element to the payment form.
+  card.mount('#card-element');
+
+  // Handle form submission.
+  var form = document.getElementById('payment-form');
+  var submitButton = document.getElementById('submit-button');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    submitButton.disabled = true;
+    stripe.confirmCardPayment('{{ client_secret }}', {
+      payment_method: {
+        card: card,
+      }
+    }).then(function(result) {
+      if (result.error) {
+        // Show error to your customer.
+        alert(result.error.message);
+        submitButton.disabled = false;
+      } else {
+        // The payment has succeeded. 
+        // Submit the form to your server to complete the payment.
+        form.submit();
+      }
+    });
+  });
+</script>
+
+{% endblock scripts %}
